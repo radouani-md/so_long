@@ -1,50 +1,84 @@
-#include "mlx/mlx.h"
+#include "/home/mradouan/Desktop/include/mlx/mlx.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include "so_long.h"
 
-int main() {
-    t_game *game;
+void init_images(t_game *game)
+{
+    int img_width, img_height;
 
-    int tile = TILE_SIZE;
+    game->wall_img = mlx_xpm_file_to_image(game->mlx, "file_util/wall.xpm", &img_width, &img_height);
+    game->space_img = mlx_xpm_file_to_image(game->mlx, "file_util/free.xpm", &img_width, &img_height);
+    game->collectible_img = mlx_xpm_file_to_image(game->mlx, "file_util/collectible.xpm", &img_width, &img_height);
+    game->exit_img = mlx_xpm_file_to_image(game->mlx, "file_util/door.xpm", &img_width, &img_height);
+    game->player_img = mlx_xpm_file_to_image(game->mlx, "file_util/player.xpm", &img_width, &img_height);
 
-    game->map = load_map("file_util/map.ber", &game->map_width, &game->map_height, game);
-    game->collectibles = 0;
-    int y = 0;
-    while (y < game->map_height) {
-        int x = 0;
-        while (x < game->map_width) {
-            if (game->map[y][x] == 'C') {
-                game->collectibles++;
-            }
-            x++;
-        }
-        y++;
+    if (!game->wall_img || !game->space_img || !game->collectible_img || !game->exit_img || !game->player_img)
+    {
+        write(1, "Error: Failed to load one or more .xpm files.\n", 46);
+        free_resources(game);
+        exit(EXIT_FAILURE);
     }
-
-    // Initialize MiniLibX
-    game->mlx = mlx_init();
-    game->win = mlx_new_window(game->mlx, game->map_width * TILE_SIZE, game->map_height * TILE_SIZE, "2D Game");
-
-    // Load images
-    game->wall_img = mlx_xpm_file_to_image(game->mlx, "wall.xpm", &tile, &tile);
-    game->player_img = mlx_xpm_file_to_image(game->mlx, "player.xpm", &tile, &tile);
-    game->collectible_img = mlx_xpm_file_to_image(game->mlx, "collectible.xpm", &tile, &tile);
-    game->rouad_img = mlx_xpm_file_to_image(game->mlx, "freewhite.xpm", &tile, &tile);
-    game->exit_img = mlx_xpm_file_to_image(game->mlx, "exit2.xpm", &tile, &tile);
-
-    if (!game->wall_img || !game->player_img || !game->collectible_img || !game->rouad_img || !game->exit_img) {
-    fprintf(stderr, "Error: Failed to load one or more images.\n");
-    return (1);
-    }    
-    // Draw the initial map
-    draw_map(game);
-     
-
-    // Hook key events
-    mlx_key_hook(game->win, get_move, &game);
-    mlx_loop(game->mlx);
-
-    return 0;
 }
 
+void handle_arguments(int argc)
+{
+    if (argc != 2)
+    {
+        write(1, "Unexpected Arguments! Please provide exactly one argument.\n", 59);
+        exit(EXIT_FAILURE);
+    }
+}
+
+void initialize_game(t_game *game, char *map_path)
+{
+    game->map = load_map(map_path, &game->width, &game->height);
+    if (!game->map)
+    {
+        write(1, "Error: Failed to load map\n", 26);
+        free(game->map);
+        free_resources(game);
+        exit(EXIT_FAILURE);
+    }
+    if (!check_cpe01(game))
+    {
+        free_resources(game);
+        write(1, "Error: Invalid map. Exiting.\n", 29);
+        exit(EXIT_FAILURE);
+    }
+}
+
+void setup_graphics(t_game *game)
+{
+    game->mlx = mlx_init();
+    if (!game->mlx)
+    {
+        free_resources(game);
+        write(1, "Error: Failed to initialize MiniLibX\n", 37);
+        exit(EXIT_FAILURE);
+    }
+    game->win = mlx_new_window(game->mlx, game->width * TILE_SIZE, game->height * TILE_SIZE, "/so_long/");
+    if (!game->win)
+    {
+        write(1, "Error: Failed to create a window\n", 33);
+        free_resources(game);
+        exit(EXIT_FAILURE);
+    }
+}
+
+int main(int argc, char **argv)
+{
+    t_game game;
+
+    handle_arguments(argc);
+    initialize_game(&game, argv[1]);
+    setup_graphics(&game);
+
+    init_images(&game);
+    draw_map(&game);
+
+    mlx_key_hook(game.win, get_move, &game);
+    mlx_loop(game.mlx);
+    free_resources(&game);
+    return (EXIT_SUCCESS);
+}

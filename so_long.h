@@ -1,39 +1,50 @@
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-#define WALL '1'
-#define EMPTY '0'
-#define COLLECTIBLE 'C'
-#define EXIT 'E'
-#define PLAYER 'P'
 #define PLAYER_SIZE 64
-#include "mlx/mlx.h"
-#include "get_file_next/get.h"
-
 #define TILE_SIZE 64
+#include "/home/mradouan/Desktop/include/mlx/mlx.h"
+#include <unistd.h>
+#include "get_file_next/get.h"
+#include <stdlib.h>
+#include <fcntl.h>
+#include <stdio.h>
 
-typedef struct s_game {
+#include <string.h>
+
+
+
+
+typedef struct s_game 
+{
     void    *mlx;
     void    *win;
-    void    *wall_img;
-	void	*rouad_img;
-    void    *player_img;
-    void    *collectible_img;
-    void    *exit_img;
     char    **map;
+    int     width;
+    int     height;
     int     player_x;
     int     player_y;
-    int     map_width;
-    int     map_height;
-    int     collectibles;
+    int     collec_coin;
+    void    *wall_img;
+    void    *space_img;
+    void    *collectible_img;
+    void    *exit_img;
+    void    *player_img;
 } t_game;
 
-char **load_map(const char *file, int *width, int *height, t_game *game);
-int calculate_num_of_words(t_game *game);
+int check_two_exit(t_game *game);
+char **load_map(const char *file, int *width, int *height);
 void draw_map(t_game *game);
+int check_cpe01(t_game *game);
+char	*get_next_line(int fd);
+int is_not_directory(const char *file);
+int is_ber(const char *filename);
+int has_required_elements(t_game *game);
+int check_two_player(t_game *game);
+int check_width(t_game *game);
+int calculate_num_of_lines(const char *file);
 int get_move(int keycode, t_game *game);
-int check_map(char **map, int width, int height);
-int cheek_rectoungle(int *width, int *height);
-int check_cpe01(int width, int height, t_game *game);
+void player_position(t_game *game);
+void free_resources(t_game *game);
 
 #endif

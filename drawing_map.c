@@ -1,34 +1,49 @@
 #include "so_long.h"
+#include "/home/mradouan/Desktop/include/mlx/mlx.h"
+
+void draw_tile(t_game *game, int row, int col)
+{
+    void *img;
+
+    img = NULL;
+    if (game->map[row][col] == '1')
+        img = game->wall_img;
+    else if (game->map[row][col] == '0')
+        img = game->space_img;
+    else if (game->map[row][col] == 'C')
+    {
+        img = game->collectible_img;
+        game->collec_coin++;
+    }
+    else if (game->map[row][col] == 'E')
+        img = game->exit_img;
+    else if (game->map[row][col] == 'P')
+        img = game->player_img;
+
+    if (img)
+        mlx_put_image_to_window(game->mlx, game->win, img, col * TILE_SIZE, row * TILE_SIZE);
+}
+
+void draw_map_row(t_game *game, int row)
+{
+    int col = 0;
+
+    while (col < game->width)
+    {
+        if (game->map[row][col] != '\n')
+            draw_tile(game, row, col);
+        col++;
+    }
+}
 
 void draw_map(t_game *game)
 {
-    int y;
-    int x;
+    int row = 0;
 
-    y = 0;
-    while (y < game->map_height)
+    game->collec_coin = 0;
+    while (row < game->height)
     {
-        x = 0;
-        while (x < game->map_width)
-        {
-            int px = x * TILE_SIZE;
-            int py = y * TILE_SIZE;
-
-            if (game->map[y][x] == '1' || game->map[y][x] == '\n' || game->map[y][x] == '\0')
-                mlx_put_image_to_window(game->mlx, game->win, game->wall_img, px, py);
-            else if (game->map[y][x] == 'C')
-                mlx_put_image_to_window(game->mlx, game->win, game->collectible_img, px, py);
-            else if (game->map[y][x] == 'E')
-                mlx_put_image_to_window(game->mlx, game->win, game->exit_img, px, py);
-            else if (game->map[y][x] == '0')
-                mlx_put_image_to_window(game->mlx, game->win, game->rouad_img, px, py);
-            else if (game->map[y][x] == 'P') {
-                game->player_x = x;
-                game->player_y = y;
-                mlx_put_image_to_window(game->mlx, game->win, game->player_img, px, py);
-            }
-            x++;
-        }
-        y++;
+        draw_map_row(game, row);
+        row++;
     }
 }
