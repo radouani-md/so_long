@@ -14,3 +14,10 @@ void md_put_number(int nb)
     else
         print(nb + 48);
 }
+int close_window(t_game *game)
+{
+    free_resources(game);
+    ft_free(game->map);
+    write(1, "\nMap is Closed. Do you feel boring !!", 37);
+    exit(0);
+}

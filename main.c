@@ -83,6 +83,7 @@ int main(int argc, char **argv)
     draw_map(&game);
 
     mlx_key_hook(game.win, get_move, &game);
+    mlx_hook(game.win, 17, 0, close_window, &game);
     mlx_loop(game.mlx);
     return (0);
 }
