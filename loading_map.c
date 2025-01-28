@@ -20,7 +20,7 @@ int continue_calculate(int num_lines, int fd)
         free(line);
         line = get_next_line(fd);
     }
-    free(line); //! 
+    free(line);
     return (num_lines);
 }
 
@@ -62,8 +62,6 @@ size_t calculate_num_of_words(char **map)
     while (map[i])
     {
         line_length = ft_strlen(map[i]);
-        // if (map[i][line_length - 1] == '\n')
-        //     line_length--;
         if (max < line_length)
             max = line_length;
         i++;
@@ -78,7 +76,6 @@ char **allocate(char **map, int num_lines, int fd)
 	{
 		fprintf(stderr, "Error\nMemory allocation failed for map.\n");
 		close(fd);
-        free(map); //! 
 		return (NULL);
 	}
 	return (map);
@@ -101,7 +98,7 @@ char **fill_map(char **map, int fd)
         free(line);
 		line = get_next_line(fd);   
     }
-    // free(line); //!
+    free(line);
     map[row] = NULL;
     return (map);
 }

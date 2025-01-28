@@ -21,7 +21,7 @@ int handle_special_tiles(t_game *game, int new_x, int new_y)
     {
         if (game->collec_coin > 0)
             return (0);
-        write(1, "You win!\n", 9);
+        write(1, "\nYou win!\n", 10);
         free_resources(game);
         ft_free(game->map);
         exit(0);
@@ -36,6 +36,8 @@ int is_valid_move(int new_x, int new_y, t_game *game)
 
 void calculate_new_position(int keycode, int *new_x, int *new_y, t_game *game)
 {
+    static int d = 1;
+
     if (keycode == 97)
         (*new_x)--;
     else if (keycode == 100)
@@ -50,13 +52,18 @@ void calculate_new_position(int keycode, int *new_x, int *new_y, t_game *game)
         ft_free(game->map);
         exit(0);
     }
+    if((*new_x != game->player_x || *new_y != game->player_y)
+    && (game->map[*new_y][*new_x] != 'E' || game->collec_coin == 0))
+        md_put_number(d++);
 }
 
 int get_move(int keycode, t_game *game)
 {
-    int new_x = game->player_x;
-    int new_y = game->player_y;
+    int new_x;
+    int new_y;
 
+    new_x = game->player_x;
+    new_y = game->player_y;
     player_position(game);
     calculate_new_position(keycode, &new_x, &new_y, game);
 
@@ -65,6 +72,5 @@ int get_move(int keycode, t_game *game)
 
     if (handle_special_tiles(game, new_x, new_y))
         update_position(game, new_x, new_y);
-
     return (0);
 }

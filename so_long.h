@@ -47,4 +47,5 @@ int check_close(t_game *game);
 int validate_map(t_game *game);
 int count_collectible(t_game *game);
 void ft_free(char **map);
+void md_put_number(int nb);
 #endif
