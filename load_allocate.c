@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get.h                                              :+:      :+:    :+:   */
+/*   load_allocate.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mradouan <mradouan@student.42.fr>          #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-01-28 22:37:18 by mradouan          #+#    #+#             */
-/*   Updated: 2025-01-28 22:37:18 by mradouan         ###   ########.fr       */
+/*   Created: 2025-01-28 21:12:09 by mradouan          #+#    #+#             */
+/*   Updated: 2025-01-28 21:12:09 by mradouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef GET_H 
-#define GET_H
+#include "so_long.h"
 
-#include <unistd.h>
-#include <stdlib.h>
-
-# include <limits.h>
-# ifndef BUFFER_SIZE 
-#define BUFFER_SIZE 32
-#endif
-
-char	*get_next_line(int fd);
-size_t	ft_strlen(char const *str);
-char	*ft_strdup(const char *s1);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strchr(const char *s, int c);
-
-#endif
+char	**allocate(char **map, int num_lines, int fd)
+{
+	map = malloc((num_lines + 1) * sizeof(char *));
+	if (!map)
+	{
+		write(2, "Error\nMemory allocation failed for map.\n", 40);
+		close(fd);
+		return (NULL);
+	}
+	return (map);
+}
