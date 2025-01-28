@@ -72,3 +72,27 @@ int check_width(t_game *game)
     }
     return (1);
 }
+
+int check_close(t_game *game)
+{
+    int row;
+    int col;
+    if (!game || !game->map)
+        return (0); 
+
+    col = 0;
+    while (col < game->width)
+    {
+        if (game->map[0][col] != '1' || game->map[game->height - 1][col] != '1')
+            return (0);
+        col++;
+    }
+    row = 0;
+    while (row < game->height)
+    {
+        if (game->map[row][0] != '1' || game->map[row][game->width - 1] != '1')
+            return (0);
+        row++;
+    }
+    return (1);
+}

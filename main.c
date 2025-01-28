@@ -1,7 +1,9 @@
-#include "/home/mradouan/Desktop/include/mlx/mlx.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include "so_long.h"
+
+
+
 
 void init_images(t_game *game)
 {
@@ -26,25 +28,24 @@ void handle_arguments(int argc)
     if (argc != 2)
     {
         write(1, "Unexpected Arguments! Please provide exactly one argument.\n", 59);
-        exit(EXIT_FAILURE);
+        exit(0);
     }
 }
 
-void initialize_game(t_game *game, char *map_path)
+int initialize_game(t_game *game, char *map_path)
 {
     game->map = load_map(map_path, &game->width, &game->height);
     if (!game->map)
     {
         write(1, "Error: Failed to load map\n", 26);
-        free(game->map);
         free_resources(game);
-        exit(EXIT_FAILURE);
+        return (0);
     }
+    game->collec_coin = count_collectible(game);
     if (!check_cpe01(game))
     {
-        free_resources(game);
         write(1, "Error: Invalid map. Exiting.\n", 29);
-        exit(EXIT_FAILURE);
+        return (0);
     }
 }
 
@@ -66,12 +67,19 @@ void setup_graphics(t_game *game)
     }
 }
 
+void f()
+{
+    system("leaks my_game");
+}
+
 int main(int argc, char **argv)
 {
     t_game game;
 
+    atexit(f);
     handle_arguments(argc);
-    initialize_game(&game, argv[1]);
+    if (!initialize_game(&game, argv[1]))
+        return 0;
     setup_graphics(&game);
 
     init_images(&game);

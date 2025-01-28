@@ -61,8 +61,8 @@ size_t calculate_num_of_words(char **map)
     while (map[i])
     {
         line_length = ft_strlen(map[i]);
-        if (map[i][line_length - 1] == '\n')
-            line_length--;
+        // if (map[i][line_length - 1] == '\n')
+        //     line_length--;
         if (max < line_length)
             max = line_length;
         i++;

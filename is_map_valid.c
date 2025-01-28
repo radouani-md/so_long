@@ -19,7 +19,7 @@ int validate_characters(t_game *game)
         while (x < game->width)
         {
             cell = game->map[y][x];
-            if (cell == '\n' || cell == '\0') 
+            if (cell == '\0') 
             {
                 x++;
                 continue ;
@@ -46,7 +46,14 @@ int check_cpe01(t_game *game)
         return (0);
     if (!check_width(game))
         return (0);
-    return 1;
+    if (!check_close(game))
+    {
+        write(1, "Map is Not Closed !!\n", 21);
+        return (0);
+    }
+    if (!validate_map(game))
+        return (0);        
+    return (1);
 }
 
 int is_not_directory(const char *file)

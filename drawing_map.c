@@ -1,5 +1,4 @@
 #include "so_long.h"
-#include "/home/mradouan/Desktop/include/mlx/mlx.h"
 
 void draw_tile(t_game *game, int row, int col)
 {
@@ -30,7 +29,7 @@ void draw_map_row(t_game *game, int row)
 
     while (col < game->width)
     {
-        if (game->map[row][col] != '\n')
+        if (game->map[row][col] != '\0')
             draw_tile(game, row, col);
         col++;
     }

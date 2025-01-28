@@ -12,9 +12,6 @@
 
 #include <string.h>
 
-
-
-
 typedef struct s_game 
 {
     void    *mlx;
@@ -46,5 +43,8 @@ int calculate_num_of_lines(const char *file);
 int get_move(int keycode, t_game *game);
 void player_position(t_game *game);
 void free_resources(t_game *game);
-
+int check_close(t_game *game);
+int validate_map(t_game *game);
+int count_collectible(t_game *game);
+void ft_free(char **map);
 #endif

@@ -32,7 +32,7 @@ int is_valid_move(int new_x, int new_y, t_game *game)
     return !(new_x < 0 || new_y < 0 || new_x >= game->width || new_y >= game->height || game->map[new_y][new_x] == '1');
 }
 
-void calculate_new_position(int keycode, int *new_x, int *new_y)
+void calculate_new_position(int keycode, int *new_x, int *new_y, t_game *game)
 {
     if (keycode == 97)
         (*new_x)--;
@@ -43,7 +43,10 @@ void calculate_new_position(int keycode, int *new_x, int *new_y)
     else if (keycode == 115)
         (*new_y)++;
     else if (keycode == 65307)
+    {
+        free_resources(game);
         exit(0);
+    }
 }
 
 int get_move(int keycode, t_game *game)
@@ -52,13 +55,13 @@ int get_move(int keycode, t_game *game)
     int new_y = game->player_y;
 
     player_position(game);
-    calculate_new_position(keycode, &new_x, &new_y);
+    calculate_new_position(keycode, &new_x, &new_y, game);
 
     if (!is_valid_move(new_x, new_y, game))
-        return 0;
+        return (0);
 
     if (handle_special_tiles(game, new_x, new_y))
         update_position(game, new_x, new_y);
 
-    return 0;
+    return (0);
 }
