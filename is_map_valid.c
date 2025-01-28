@@ -30,7 +30,7 @@ int validate_characters(t_game *game)
         }
         y++;
     }
-    return 1;
+    return (1);
 }
 
 int check_cpe01(t_game *game)

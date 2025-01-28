@@ -20,11 +20,13 @@ int handle_special_tiles(t_game *game, int new_x, int new_y)
     if (game->map[new_y][new_x] == 'E')
     {
         if (game->collec_coin > 0)
-            return 0;
+            return (0);
         write(1, "You win!\n", 9);
+        free_resources(game);
+        ft_free(game->map);
         exit(0);
     }
-    return 1;
+    return (1);
 }
 
 int is_valid_move(int new_x, int new_y, t_game *game)
@@ -45,6 +47,7 @@ void calculate_new_position(int keycode, int *new_x, int *new_y, t_game *game)
     else if (keycode == 65307)
     {
         free_resources(game);
+        ft_free(game->map);
         exit(0);
     }
 }

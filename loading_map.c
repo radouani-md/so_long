@@ -20,6 +20,7 @@ int continue_calculate(int num_lines, int fd)
         free(line);
         line = get_next_line(fd);
     }
+    free(line); //! 
     return (num_lines);
 }
 
@@ -75,8 +76,9 @@ char **allocate(char **map, int num_lines, int fd)
 	map = malloc((num_lines + 1) * sizeof(char *));
 	if (!map)
 	{
-		fprintf(stderr, "Error: Memory allocation failed for map.\n");
+		fprintf(stderr, "Error\nMemory allocation failed for map.\n");
 		close(fd);
+        free(map); //! 
 		return (NULL);
 	}
 	return (map);
@@ -97,8 +99,9 @@ char **fill_map(char **map, int fd)
             line[len - 1] = '\0';
         map[row++] = ft_strdup(line);
         free(line);
-		line = get_next_line(fd);
+		line = get_next_line(fd);   
     }
+    // free(line); //!
     map[row] = NULL;
     return (map);
 }

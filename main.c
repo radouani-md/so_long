@@ -2,12 +2,10 @@
 #include <stdlib.h>
 #include "so_long.h"
 
-
-
-
 void init_images(t_game *game)
 {
-    int img_width, img_height;
+    int img_width;
+    int img_height;
 
     game->wall_img = mlx_xpm_file_to_image(game->mlx, "file_util/wall.xpm", &img_width, &img_height);
     game->space_img = mlx_xpm_file_to_image(game->mlx, "file_util/free.xpm", &img_width, &img_height);
@@ -19,6 +17,7 @@ void init_images(t_game *game)
     {
         write(1, "Error: Failed to load one or more .xpm files.\n", 46);
         free_resources(game);
+        ft_free(game->map);
         exit(EXIT_FAILURE);
     }
 }
@@ -38,13 +37,15 @@ int initialize_game(t_game *game, char *map_path)
     if (!game->map)
     {
         write(1, "Error: Failed to load map\n", 26);
-        free_resources(game);
+        // free_resources(game);
+        ft_free(game->map);
         return (0);
     }
     game->collec_coin = count_collectible(game);
     if (!check_cpe01(game))
     {
         write(1, "Error: Invalid map. Exiting.\n", 29);
+        ft_free(game->map);
         return (0);
     }
 }
@@ -55,6 +56,7 @@ void setup_graphics(t_game *game)
     if (!game->mlx)
     {
         free_resources(game);
+        ft_free(game->map);
         write(1, "Error: Failed to initialize MiniLibX\n", 37);
         exit(EXIT_FAILURE);
     }
@@ -63,23 +65,18 @@ void setup_graphics(t_game *game)
     {
         write(1, "Error: Failed to create a window\n", 33);
         free_resources(game);
-        exit(EXIT_FAILURE);
+        ft_free(game->map);
+        exit(0);
     }
-}
-
-void f()
-{
-    system("leaks my_game");
 }
 
 int main(int argc, char **argv)
 {
     t_game game;
 
-    atexit(f);
     handle_arguments(argc);
     if (!initialize_game(&game, argv[1]))
-        return 0;
+        return (0);
     setup_graphics(&game);
 
     init_images(&game);
@@ -87,6 +84,5 @@ int main(int argc, char **argv)
 
     mlx_key_hook(game.win, get_move, &game);
     mlx_loop(game.mlx);
-    free_resources(&game);
-    return (EXIT_SUCCESS);
+    return (0);
 }
