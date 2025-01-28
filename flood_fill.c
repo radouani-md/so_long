@@ -79,9 +79,8 @@ int validate_map(t_game *game)
     }
     copy_map[i] = NULL;
     find_position(game, &game->player_x, &game->player_y);
-
     flood_file(game, copy_map, game->player_x, game->player_y, &collectibles, &exit_here);
-
+    ft_free(copy_map);
     if (collectibles == game->collec_coin && exit_here)
         return (1);
     if (collectibles != game->collec_coin)
