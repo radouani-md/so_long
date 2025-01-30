@@ -111,7 +111,7 @@ char	**load_map(const char *file, int *width, int *height)
 		return (write(2, "The file is Empty or has newlines\n", 34), NULL);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		return (printf("Error loading !!"), NULL);
+		return (write(2, "Error loading !!", 16), NULL);
 	map = allocate(map, num_lines, fd);
 	if (!map)
 		return (NULL);

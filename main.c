@@ -25,10 +25,11 @@ void	init_images(t_game *game)
 			"file_util/collectible.xpm", &img_width, &img_height);
 	game->exit_img = mlx_xpm_file_to_image(game->mlx, "file_util/door.xpm",
 			&img_width, &img_height);
-	game->player_img = mlx_xpm_file_to_image(game->mlx, "file_util/player.xpm",
-			&img_width, &img_height);
-	if (!game->wall_img || !game->space_img || !game->collectible_img
-		|| !game->exit_img || !game->player_img)
+	game->direction = 2;
+	get_direction(game, img_width, img_height);
+
+	if (!game->wall_img || !game->space_img || !game->collectible_img || !game->exit_img
+		|| !game->player_img)
 	{
 		write(2, "Error: Failed to load one or more .xpm files.\n", 46);
 		free_resources(game);
@@ -55,6 +56,7 @@ int	initialize_game(t_game *game, char *map_path)
 		ft_free(game->map);
 		return (0);
 	}
+	game->moves = 0;
 	game->collec_coin = count_collectible(game);
 	if (!check_cpe01(game))
 	{
@@ -97,6 +99,9 @@ int	main(int argc, char **argv)
 	draw_map(&game);
 	mlx_key_hook(game.win, get_move, &game);
 	mlx_hook(game.win, 17, 0, close_window, &game);
+	// mlx_loop_hook(game.mlx, update_animation, &game);
 	mlx_loop(game.mlx);
+	free_resources(&game);
+	ft_free(game.map);
 	return (0);
 }

@@ -22,6 +22,7 @@ void	update_position(t_game *game, int new_x, int new_y)
 	game->map[new_y][new_x] = 'P';
 	game->player_x = new_x;
 	game->player_y = new_y;
+	display_moves(game);
 }
 
 int	handle_special_tiles(t_game *game, int new_x, int new_y)
@@ -51,6 +52,7 @@ int	is_valid_move(int new_x, int new_y, t_game *game)
 
 void	new_posi(int keycode, int *new_x, int *new_y, t_game *game)
 {
+	set_direction(keycode, game);
 	if (keycode == 97)
 		(*new_x)--;
 	else if (keycode == 100)
@@ -67,12 +69,14 @@ void	new_posi(int keycode, int *new_x, int *new_y, t_game *game)
 	}
 }
 
-int	get_move(int keycode, t_game *game)
+int	get_move(int keycode, t_game *game, int img_width, int img_height)
 {
 	int			new_x;
 	int			new_y;
 	static int	d = 1;
 
+	img_width = 0;
+	img_height = 0;
 	new_x = game->player_x;
 	new_y = game->player_y;
 	player_position(game);
@@ -83,9 +87,13 @@ int	get_move(int keycode, t_game *game)
 	game->map[new_y][new_x] == 'C' ||
 	(game->map[new_y][new_x] == 'E' && game->collec_coin == 0))
 	{
+		game->moves++;
 		md_put_number(d++);
 	}
 	if (handle_special_tiles(game, new_x, new_y))
+	{
+		get_direction(game, img_width, img_height);
 		update_position(game, new_x, new_y);
+	}
 	return (0);
 }

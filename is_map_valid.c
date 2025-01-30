@@ -90,7 +90,7 @@ int	is_ber(const char *filename)
 	len_extension = ft_strlen(extension);
 	if (len_filename < len_extension)
 		return (0);
-	if (strcmp(filename + len_filename - len_extension, extension) != 0)
+	if (ft_strcmp(filename + len_filename - len_extension, extension) != 0)
 		return (0);
 	if (len_filename == len_extension
 		|| filename[len_filename - len_extension - 1] == '.')
