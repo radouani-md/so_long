@@ -90,11 +90,11 @@ char	**fill_map(char **map, int fd)
 		len = ft_strlen(line);
 		if (line[len - 1] == '\n')
 			line[len - 1] = '\0';
-		map[row++] = ft_strdup(line);
-		free(line);
+		map[row++] = line;
+		// free(line);
 		line = get_next_line(fd);
 	}
-	free(line);
+	// free(line);
 	map[row] = NULL;
 	return (map);
 }

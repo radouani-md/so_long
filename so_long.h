@@ -39,11 +39,15 @@ typedef struct s_game
 	int		player_x;
 	int		player_y;
 	int		collec_coin;
+	void	*enemy_img;
 	void	*wall_img;
 	void	*space_img;
 	void	*collectible_img;
 	void	*exit_img;
 	void	*player_img;
+	void	*enemy_img_left;
+	void	*enemy_img_right;
+	int		enemy_frame;
 	int		moves;
 	int		direction;
 }	t_game;
@@ -73,6 +77,6 @@ char	*md_itoa(int n);
 void	display_moves(t_game *game);
 void	get_direction(t_game *game, int img_width, int	img_height);
 void	set_direction(int keycode, t_game *game);
-int		update_animation(t_game *game);
+int		animate_enemy(t_game *game);
 
 #endif

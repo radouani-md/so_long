@@ -106,5 +106,6 @@ char	*get_next_line(int fd)
 		return (free(static_v), NULL);
 	line = get_the_line(static_v);
 	static_v = get_next(static_v);
+	// exit(0);
 	return (line);
 }

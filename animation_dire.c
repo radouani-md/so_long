@@ -25,18 +25,18 @@ void get_direction(t_game *game, int img_width, int img_height)
 			&img_width, &img_height);
 	}
 }
-
-// int	update_animation(t_game *game)
+// int	animate_enemy(t_game *game)
 // {
-// 	static int frame_counter = 0;
-
-// 	if (frame_counter++ > 10) // Change frame every 10 loops
+// 	static int frame_count = 0;
+// 	frame_count++;
+// 	if (frame_count >= 500) // Change every 20 frames
 // 	{
-// 		game->current_frame = (game->current_frame + 1) % 4;
-// 		game->player_img = game->py_frame[game->current_frame]; // Update the displayed frame
-// 		frame_counter = 0;
+// 		if (game->enemy_img == game->enemy_img_left)
+// 			game->enemy_img = game->enemy_img_right;
+// 		else
+// 			game->enemy_img = game->enemy_img_left;
+// 		draw_map(game); // Redraw map with the updated enemy image
+// 		frame_count = 0;
 // 	}
-// 	mlx_put_image_to_window(game->mlx, game->win, game->space_img, game->player_x * 32, game->player_y * 32); // Clear old position
-// 	mlx_put_image_to_window(game->mlx, game->win, game->player_img, game->player_x * 32, game->player_y * 32); // Draw new frame
-// 	return (0);
+// 	return (1);
 // }

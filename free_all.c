@@ -24,6 +24,8 @@ void	free_resources(t_game *game)
 		mlx_destroy_image(game->mlx, game->exit_img);
 	if (game->player_img)
 		mlx_destroy_image(game->mlx, game->player_img);
+	if (game->enemy_img)
+		mlx_destroy_image(game->mlx, game->enemy_img);
 	if (game->win)
 		mlx_destroy_window(game->mlx, game->win);
 	if (game->mlx)
@@ -38,6 +40,8 @@ void	ft_free(char **map)
 	int	i;
 
 	i = 0;
+	if (!map)
+		return ;
 	while (map[i])
 		free(map[i++]);
 	free(map);

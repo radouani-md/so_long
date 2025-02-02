@@ -15,7 +15,7 @@
 int	is_valid_char(char cell)
 {
 	return (cell == 'E' || cell == 'C' || cell == 'P'
-		|| cell == '1' || cell == '0');
+		|| cell == '1' || cell == '0' || cell == 'M');
 }
 
 int	validate_characters(t_game *game)

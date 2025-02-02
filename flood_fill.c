@@ -61,7 +61,7 @@ void	flood_file(t_game *game, char **copy_map, int x, int y, int *collectble, in
 {
 	if (x < 0 || y < 0 || y >= game->height || x >= game->width)
 		return ;
-	if (copy_map[y][x] == '1' || copy_map[y][x] == 'F')
+	if (copy_map[y][x] == '1' || copy_map[y][x] == 'F' || copy_map[y][x] == 'M')
 		return ;
 	if (copy_map[y][x] == 'C')
 		(*collectble)++;
@@ -98,7 +98,7 @@ int	validate_map(t_game *game)
 	if (collectibles == game->collec_coin && exit_here)
 		return (1);
 	if (collectibles != game->collec_coin)
-		write(1, "Error: Map validation failed (No collectibles).\n", 48);
+		write(1, "Error: Map validation failed (No collectibles or A Enemy Reched).\n", 66);
 	write(1, "Error: Map validation failed (No Exit found).\n", 46);
 	return (0);
 }

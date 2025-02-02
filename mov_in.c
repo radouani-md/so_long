@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mov_in.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mradouan <mradouan@student.42.fr>          #+#  +:+       +#+        */
+/*   By: mradouan <mradouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-01-28 21:31:35 by mradouan          #+#    #+#             */
-/*   Updated: 2025-01-28 21:31:35 by mradouan         ###   ########.fr       */
+/*   Created: 2025/01/28 21:31:35 by mradouan          #+#    #+#             */
+/*   Updated: 2025/02/02 11:29:26 by mradouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,16 @@ int	handle_special_tiles(t_game *game, int new_x, int new_y)
 	{
 		if (game->collec_coin > 0)
 			return (0);
-		write(1, "\nYou win!\n", 10);
-		free_resources(game);
+		write(1, "\nCONGRATS You Win !\n", 20);
 		ft_free(game->map);
+		free_resources(game);
+		exit(0);
+	}
+	if (game->map[new_y][new_x] == 'M')
+	{
+		write(1, "\nGAME OVER !! Try Again\n", 24);
+		ft_free(game->map);
+		free_resources(game);
 		exit(0);
 	}
 	return (1);
@@ -63,8 +70,8 @@ void	new_posi(int keycode, int *new_x, int *new_y, t_game *game)
 		(*new_y)++;
 	else if (keycode == 65307)
 	{
-		free_resources(game);
 		ft_free(game->map);
+		free_resources(game);
 		exit(0);
 	}
 }

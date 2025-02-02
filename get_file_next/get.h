@@ -18,7 +18,7 @@
 
 # include <limits.h>
 # ifndef BUFFER_SIZE 
-#define BUFFER_SIZE 32
+#define BUFFER_SIZE 999
 #endif
 
 char	*get_next_line(int fd);
