@@ -34,6 +34,7 @@ typedef struct s_game
 	void	*mlx;
 	void	*win;
 	char	**map;
+	char	**copy_map;
 	int		width;
 	int		height;
 	int		player_x;
@@ -51,6 +52,12 @@ typedef struct s_game
 	int		moves;
 	int		direction;
 }	t_game;
+
+typedef struct s_flood
+{
+    int collectibles;
+    int exit_found;
+}   t_flood;
 
 int		check_two_exit(t_game *game);
 char	**load_map(const char *file, int *width, int *height);

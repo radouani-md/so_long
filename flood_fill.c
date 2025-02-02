@@ -57,48 +57,46 @@ void	find_position(t_game *game, int *px, int *py)
 	}
 }
 
-void	flood_file(t_game *game, char **copy_map, int x, int y, int *collectble, int *exit_here)
+void	flood_file(t_game *game, int x, int y, t_flood *flood)
 {
 	if (x < 0 || y < 0 || y >= game->height || x >= game->width)
 		return ;
-	if (copy_map[y][x] == '1' || copy_map[y][x] == 'F' || copy_map[y][x] == 'M')
+	if (game->copy_map[y][x] == '1' || game->copy_map[y][x] == 'F'
+		|| game->copy_map[y][x] == 'M')
 		return ;
-	if (copy_map[y][x] == 'C')
-		(*collectble)++;
-	if (copy_map[y][x] == 'E')
-		*exit_here = 1;
-	copy_map[y][x] = 'F';
-	flood_file(game, copy_map, x + 1, y, collectble, exit_here);
-	flood_file(game, copy_map, x - 1, y, collectble, exit_here);
-	flood_file(game, copy_map, x, y + 1, collectble, exit_here);
-	flood_file(game, copy_map, x, y - 1, collectble, exit_here);
+	if (game->copy_map[y][x] == 'C')
+		flood->collectibles++;
+	if (game->copy_map[y][x] == 'E')
+		flood->exit_found = 1;
+	game->copy_map[y][x] = 'F';
+	flood_file(game, x + 1, y, flood);
+	flood_file(game, x - 1, y, flood);
+	flood_file(game, x, y + 1, flood);
+	flood_file(game, x, y - 1, flood);
 }
 
 int	validate_map(t_game *game)
 {
-	int		collectibles;
-	int		exit_here;
-	char	**copy_map;
+	t_flood	flood;
 	int		i;
 
-	collectibles = 0;
-	exit_here = 0;
+	flood.collectibles = 0;
+	flood.exit_found = 0;
 	i = 0;
-	copy_map = malloc((game->height + 1) * sizeof(char *));
+	game->copy_map = malloc((game->height + 1) * sizeof(char *));
 	while (game->map[i])
 	{
-		copy_map[i] = ft_strdup(game->map[i]);
+		game->copy_map[i] = ft_strdup(game->map[i]);
 		i++;
 	}
-	copy_map[i] = NULL;
+	game->copy_map[i] = NULL;
 	find_position(game, &game->player_x, &game->player_y);
-	flood_file(game, copy_map, game->player_x, game->player_y,
-		&collectibles, &exit_here);
-	ft_free(copy_map);
-	if (collectibles == game->collec_coin && exit_here)
+	flood_file(game, game->player_x, game->player_y, &flood);
+	ft_free(game->copy_map);
+	if (flood.collectibles == game->collec_coin && flood.exit_found)
 		return (1);
-	if (collectibles != game->collec_coin)
-		write(1, "Error: Map validation failed (No collectibles or A Enemy Reched).\n", 66);
+	if (flood.collectibles != game->collec_coin)
+		write(1, "Error: Map validation failed (No Coins or Enmy).\n", 49);
 	write(1, "Error: Map validation failed (No Exit found).\n", 46);
 	return (0);
 }

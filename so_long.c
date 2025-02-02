@@ -26,16 +26,15 @@ void	init_images(t_game *game)
 	game->exit_img = mlx_xpm_file_to_image(game->mlx, "file_util/door.xpm",
 			&img_width, &img_height);
 	game->enemy_img = mlx_xpm_file_to_image(game->mlx, "file_util/enemy.xpm",
-		&img_width, &img_height);
+			&img_width, &img_height);
 	// game->enemy_img_left = mlx_xpm_file_to_image(game->mlx, "file_util/enemy.xpm", &img_width, &img_height);
 	// game->enemy_img_right = mlx_xpm_file_to_image(game->mlx, "file_util/enemy_back.xpm", &img_width, &img_height);
 	// game->enemy_img = game->enemy_img_left;  // Default enemy image
 	// game->enemy_frame = 0;
 	game->direction = 2;
 	get_direction(game, img_width, img_height);
-
-	if (!game->wall_img || !game->space_img || !game->collectible_img || !game->exit_img
-		|| !game->player_img || !game->enemy_img)
+	if (!game->wall_img || !game->space_img || !game->collectible_img
+		|| !game->exit_img || !game->player_img || !game->enemy_img)
 	{
 		write(2, "Error: Failed to load one or more .xpm files.\n", 46);
 		free_resources(game);
@@ -70,8 +69,6 @@ int	initialize_game(t_game *game, char *map_path)
 		ft_free(game->map);
 		return (0);
 	}
-
-	// Hna probleme of leaks.
 }
 
 void	setup_graphics(t_game *game)

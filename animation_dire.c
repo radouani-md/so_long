@@ -1,30 +1,43 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   animation_dire.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mradouan <mradouan@student.42.fr>          #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-02-02 13:48:43 by mradouan          #+#    #+#             */
+/*   Updated: 2025-02-02 13:48:43 by mradouan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-void get_direction(t_game *game, int img_width, int img_height)
+void	get_direction(t_game *game, int img_width, int img_height)
 {
 	if (game->player_img)
 		mlx_destroy_image(game->mlx, game->player_img);
-	if (game->direction == 1) // Left
+	if (game->direction == 1)
 	{
-		game->player_img = mlx_xpm_file_to_image(game->mlx, "file_util/left1.xpm",
-			&img_width, &img_height);
+		game->player_img = mlx_xpm_file_to_image(game->mlx,
+				"file_util/left1.xpm", &img_width, &img_height);
 	}
-	else if (game->direction == 2) // Right
+	else if (game->direction == 2)
 	{
-		game->player_img = mlx_xpm_file_to_image(game->mlx, "file_util/right1.xpm",
-			&img_width, &img_height);
+		game->player_img = mlx_xpm_file_to_image(game->mlx,
+				"file_util/right1.xpm", &img_width, &img_height);
 	}
-	else if (game->direction == 3) // Up
+	else if (game->direction == 3)
 	{
-		game->player_img = mlx_xpm_file_to_image(game->mlx, "file_util/up1.xpm",
-			&img_width, &img_height);
+		game->player_img = mlx_xpm_file_to_image(game->mlx,
+				"file_util/up1.xpm", &img_width, &img_height);
 	}
-	else if (game->direction == 4) // Down
+	else if (game->direction == 4)
 	{
-		game->player_img = mlx_xpm_file_to_image(game->mlx, "file_util/nor1.xpm",
-			&img_width, &img_height);
+		game->player_img = mlx_xpm_file_to_image(game->mlx,
+				"file_util/nor1.xpm", &img_width, &img_height);
 	}
 }
+
 // int	animate_enemy(t_game *game)
 // {
 // 	static int frame_count = 0;

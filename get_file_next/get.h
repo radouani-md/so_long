@@ -5,20 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mradouan <mradouan@student.42.fr>          #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-01-28 22:37:18 by mradouan          #+#    #+#             */
-/*   Updated: 2025-01-28 22:37:18 by mradouan         ###   ########.fr       */
+/*   Created: 2025-02-02 14:09:39 by mradouan          #+#    #+#             */
+/*   Updated: 2025-02-02 14:09:39 by mradouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef GET_H 
-#define GET_H
+#ifndef GET_H
+# define GET_H
 
-#include <unistd.h>
-#include <stdlib.h>
+# include <unistd.h>
+# include <stdlib.h>
 
 # include <limits.h>
-# ifndef BUFFER_SIZE 
+
+# ifndef BUFFER_SIZE
 #define BUFFER_SIZE 999
+
 #endif
 
 char	*get_next_line(int fd);

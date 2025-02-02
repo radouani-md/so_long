@@ -17,7 +17,7 @@ OBJ_BONUS = ${SRC_BONUS:.c=.o}
 HEADER = libft.h
 
 all: $(NAME)
-	cc -o my_game main.c so_long.a $(MLX_FLAGS)
+	cc -o my_game so_long.c so_long.a $(MLX_FLAGS)
 $(NAME): $(OBJ)
 	$(AR) $(NAME) $(OBJ)
 
