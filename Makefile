@@ -14,7 +14,7 @@ SRC = $(dirGet)/get_next_line.c $(dirGet)/get_next_line_utils.c loading_map.c mo
 
 SRC_BONUS = $(dirGet)/get_next_line_bonus.c $(dirGet)/get_next_line_utils_bonus.c loading_map_bonus.c mov_in_bonus.c drawing_map_bonus.c \
 	is_map_valid_bonus.c check_require_bonus.c check_player_width_bonus.c position_player_bonus.c free_all_bonus.c flood_fill_bonus.c print_number_bonus.c \
-	load_allocate_bonus.c md_itoa_bonus.c animation_dire_bonus.c so_long_bonus.c
+	load_allocate_bonus.c md_itoa_bonus.c animation_dire_bonus.c so_long_bonus.c img_enemy_bonus.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -39,4 +39,4 @@ clean:
 fclean: clean
 	rm -f $(NAME) $(NAME_BONUS)
 
-re: fclean all bonus
+re: fclean all

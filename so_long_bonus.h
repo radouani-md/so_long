@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # ifndef PLAYER_SIZE
 #  define PLAYER_SIZE 64
@@ -46,6 +46,8 @@ typedef struct s_game
 	void	*player_img;
 	void	*enemy_img_left;
 	void	*enemy_img_right;
+	void	*enemy_img_up;
+	void	*enemy_img_down;
 	int		is_yes;
 	int		enemy_frame;
 	int		moves;
@@ -84,5 +86,7 @@ void	display_moves(t_game *game);
 void	get_direction(t_game *game, int img_width, int img_height);
 void	set_direction(int keycode, t_game *game);
 int		animate_enemy(t_game *game);
+void	enemy_img(t_game *game, int img_width, int img_height);
+void	redraw_enemy(t_game *game);
 
 #endif

@@ -12,7 +12,6 @@
 
 #include "so_long_bonus.h"
 
-
 int	is_valid_char(char cell)
 {
 	return (cell == 'E' || cell == 'C' || cell == 'P'

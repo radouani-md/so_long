@@ -77,6 +77,5 @@ char	**allocate(char **map, int num_lines, int fd);
 void	display_moves(t_game *game);
 void	get_direction(t_game *game, int img_width, int img_height);
 void	set_direction(int keycode, t_game *game);
-void ft_freeTwice(t_game *game);
 
 #endif

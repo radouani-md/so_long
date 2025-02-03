@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get.h                                              :+:      :+:    :+:   */
+/*   get_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mradouan <mradouan@student.42.fr>          #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-02-02 14:09:39 by mradouan          #+#    #+#             */
-/*   Updated: 2025-02-02 14:09:39 by mradouan         ###   ########.fr       */
+/*   Created: 2025-02-03 21:53:36 by mradouan          #+#    #+#             */
+/*   Updated: 2025-02-03 21:53:36 by mradouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_H
-# define GET_H
+#ifndef GET_BONUS_H
+# define GET_BONUS_H
 
 # include <unistd.h>
 # include <stdlib.h>

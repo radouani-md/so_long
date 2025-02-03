@@ -29,6 +29,7 @@ void	md_put_number(int nb)
 		print(nb + 48);
 	}
 }
+
 void	md_print_nb(int nb)
 {	
 	write(1, "{Step ", 6);

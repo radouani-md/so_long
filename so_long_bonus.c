@@ -25,12 +25,8 @@ void	init_images(t_game *game)
 			"textures/collectible.xpm", &img_width, &img_height);
 	game->exit_img = mlx_xpm_file_to_image(game->mlx, "textures/door.xpm",
 			&img_width, &img_height);
-	game->enemy_img = mlx_xpm_file_to_image(game->mlx, "textures/enemy.xpm",
-			&img_width, &img_height);
-	// game->enemy_img_left = mlx_xpm_file_to_image(game->mlx, "file_util/enemy.xpm", &img_width, &img_height);
-	// game->enemy_img_right = mlx_xpm_file_to_image(game->mlx, "file_util/enemy_back.xpm", &img_width, &img_height);
-	// game->enemy_img = game->enemy_img_left;  // Default enemy image
-	// game->enemy_frame = 0;
+	enemy_img(game, img_width, img_height);
+	game->enemy_frame = 0;
 	game->player_img = NULL;
 	game->direction = 2;
 	get_direction(game, img_width, img_height);
@@ -106,7 +102,7 @@ int	main(int argc, char **argv)
 	draw_map(&game);
 	mlx_key_hook(game.win, get_move, &game);
 	mlx_hook(game.win, 17, 0, close_window, &game);
-	// mlx_loop_hook(game.mlx, animate_enemy, &game);
+	mlx_loop_hook(game.mlx, animate_enemy, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }

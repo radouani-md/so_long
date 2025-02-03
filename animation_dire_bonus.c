@@ -38,18 +38,23 @@ void	get_direction(t_game *game, int img_width, int img_height)
 	}
 }
 
-// int	animate_enemy(t_game *game)
-// {
-// 	static int frame_count = 0;
-// 	frame_count++;
-// 	if (frame_count >= 500) // Change every 20 frames
-// 	{
-// 		if (game->enemy_img == game->enemy_img_left)
-// 			game->enemy_img = game->enemy_img_right;
-// 		else
-// 			game->enemy_img = game->enemy_img_left;
-// 		draw_map(game); // Redraw map with the updated enemy image
-// 		frame_count = 0;
-// 	}
-// 	return (1);
-// }
+int	animate_enemy(t_game *game)
+{
+	static int	frame_count = 0;
+
+	frame_count++;
+	if (frame_count >= 18000)
+	{
+		if (game->enemy_img == game->enemy_img_up)
+			game->enemy_img = game->enemy_img_down;
+		else if (game->enemy_img == game->enemy_img_down)
+			game->enemy_img = game->enemy_img_right;
+		else if (game->enemy_img == game->enemy_img_right)
+			game->enemy_img = game->enemy_img_left;
+		else
+			game->enemy_img = game->enemy_img_up;
+		redraw_enemy(game);
+		frame_count = 0;
+	}
+	return (1);
+}
