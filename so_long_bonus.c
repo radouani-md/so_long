@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mradouan <mradouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 21:23:19 by mradouan          #+#    #+#             */
-/*   Updated: 2025/02/02 20:49:00 by mradouan         ###   ########.fr       */
+/*   Updated: 2025/02/02 11:41:17 by mradouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	init_images(t_game *game)
 {
@@ -25,11 +25,17 @@ void	init_images(t_game *game)
 			"textures/collectible.xpm", &img_width, &img_height);
 	game->exit_img = mlx_xpm_file_to_image(game->mlx, "textures/door.xpm",
 			&img_width, &img_height);
+	game->enemy_img = mlx_xpm_file_to_image(game->mlx, "textures/enemy.xpm",
+			&img_width, &img_height);
+	// game->enemy_img_left = mlx_xpm_file_to_image(game->mlx, "file_util/enemy.xpm", &img_width, &img_height);
+	// game->enemy_img_right = mlx_xpm_file_to_image(game->mlx, "file_util/enemy_back.xpm", &img_width, &img_height);
+	// game->enemy_img = game->enemy_img_left;  // Default enemy image
+	// game->enemy_frame = 0;
 	game->player_img = NULL;
 	game->direction = 2;
 	get_direction(game, img_width, img_height);
 	if (!game->wall_img || !game->space_img || !game->collectible_img
-		|| !game->exit_img || !game->player_img)
+		|| !game->exit_img || !game->player_img || !game->enemy_img)
 	{
 		write(2, "Error: Failed to load one or more .xpm files.\n", 46);
 		free_resources(game);
@@ -100,6 +106,7 @@ int	main(int argc, char **argv)
 	draw_map(&game);
 	mlx_key_hook(game.win, get_move, &game);
 	mlx_hook(game.win, 17, 0, close_window, &game);
+	// mlx_loop_hook(game.mlx, animate_enemy, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }

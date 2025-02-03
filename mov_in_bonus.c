@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	update_position(t_game *game, int new_x, int new_y)
 {
@@ -22,6 +22,7 @@ void	update_position(t_game *game, int new_x, int new_y)
 	game->map[new_y][new_x] = 'P';
 	game->player_x = new_x;
 	game->player_y = new_y;
+	display_moves(game);
 }
 
 int	handle_special_tiles(t_game *game, int new_x, int new_y)
@@ -35,7 +36,14 @@ int	handle_special_tiles(t_game *game, int new_x, int new_y)
 	{
 		if (game->collec_coin > 0)
 			return (0);
-		write(1, "\nCongrats ! You Win :) \n", 24);
+		write(1, "\nCONGRATS You Win !\n", 20);
+		ft_free(game->map);
+		free_resources(game);
+		exit(0);
+	}
+	if (game->map[new_y][new_x] == 'M')
+	{
+		write(1, "\nGAME OVER !! Try Again\n", 24);
 		ft_free(game->map);
 		free_resources(game);
 		exit(0);
@@ -62,7 +70,6 @@ void	new_posi(int keycode, int *new_x, int *new_y, t_game *game)
 		(*new_y)++;
 	else if (keycode == 65307)
 	{
-		write(1, "You Quit the Game\n", 18);
 		ft_free(game->map);
 		free_resources(game);
 		exit(0);
@@ -77,9 +84,9 @@ int	get_move(int keycode, t_game *game, int img_width, int img_height)
 
 	img_width = 0;
 	img_height = 0;
-	player_position(game);
 	new_x = game->player_x;
 	new_y = game->player_y;
+	player_position(game);
 	new_posi(keycode, &new_x, &new_y, game);
 	if (!is_valid_move(new_x, new_y, game))
 		return (0);

@@ -10,12 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
+
 
 int	is_valid_char(char cell)
 {
 	return (cell == 'E' || cell == 'C' || cell == 'P'
-		|| cell == '1' || cell == '0');
+		|| cell == '1' || cell == '0' || cell == 'M');
 }
 
 int	validate_characters(t_game *game)
@@ -37,7 +38,7 @@ int	validate_characters(t_game *game)
 				continue ;
 			}
 			if (!is_valid_char(cell))
-				return (write(2, "Error: Invalid character\n", 25), 0);
+				return (write(2, "Error: Invalid character", 24), 0);
 			x++;
 		}
 		y++;

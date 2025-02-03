@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	draw_tile(t_game *game, int row, int col)
 {
@@ -26,6 +26,8 @@ void	draw_tile(t_game *game, int row, int col)
 		img = game->collectible_img;
 		game->collec_coin++;
 	}
+	else if (game->map[row][col] == 'M')
+		img = game->enemy_img;
 	else if (game->map[row][col] == 'E')
 		img = game->exit_img;
 	else if (game->map[row][col] == 'P')

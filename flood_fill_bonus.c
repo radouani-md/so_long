@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 int	count_collectible(t_game *game)
 {
@@ -61,7 +61,8 @@ void	flood_file(t_game *game, int x, int y, t_flood *flood)
 {
 	if (x < 0 || y < 0 || y >= game->height || x >= game->width)
 		return ;
-	if (game->copy_map[y][x] == '1' || game->copy_map[y][x] == 'F')
+	if (game->copy_map[y][x] == '1' || game->copy_map[y][x] == 'F'
+		|| game->copy_map[y][x] == 'M')
 		return ;
 	if (game->copy_map[y][x] == 'C')
 		flood->collectibles++;

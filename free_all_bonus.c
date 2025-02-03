@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	free_resources(t_game *game)
 {
@@ -24,6 +24,8 @@ void	free_resources(t_game *game)
 		mlx_destroy_image(game->mlx, game->exit_img);
 	if (game->player_img)
 		mlx_destroy_image(game->mlx, game->player_img);
+	if (game->enemy_img)
+		mlx_destroy_image(game->mlx, game->enemy_img);
 	if (game->win)
 		mlx_destroy_window(game->mlx, game->win);
 	if (game->mlx)

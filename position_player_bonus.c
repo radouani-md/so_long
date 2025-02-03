@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	set_direction(int keycode, t_game *game)
 {
@@ -45,4 +45,15 @@ void	player_position(t_game *game)
 		}
 		j++;
 	}
+}
+
+void	display_moves(t_game *game)
+{
+	char	*move_str;
+
+	move_str = md_itoa(game->moves);
+	draw_map(game);
+	mlx_string_put(game->mlx, game->win, 10, 10, 0xFFFFFF, "Moves :");
+	mlx_string_put(game->mlx, game->win, 60, 10, 0xFFFFFF, move_str);
+	free(move_str);
 }
