@@ -70,6 +70,7 @@ void	new_posi(int keycode, int *new_x, int *new_y, t_game *game)
 		(*new_y)++;
 	else if (keycode == 65307)
 	{
+		write(1, "You Quit the Game\n", 18);
 		ft_free(game->map);
 		free_resources(game);
 		exit(0);

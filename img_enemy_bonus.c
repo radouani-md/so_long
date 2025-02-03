@@ -38,11 +38,11 @@ void	redraw_enemy(t_game *game)
 		while (col < game->width)
 		{
 			if (game->map[row][col] == 'M')
-			{	
-				mlx_put_image_to_window(game->mlx, game->win,
-					game->enemy_img, col * TILE_SIZE, row * TILE_SIZE);
-				mlx_put_image_to_window(game->mlx, game->win,
-					game->space_img, col * TILE_SIZE, row * TILE_SIZE);
+			{
+				mlx_put_image_to_window(game->mlx, game->win, game->space_img,
+					col * TILE_SIZE, row * TILE_SIZE);
+				mlx_put_image_to_window(game->mlx, game->win, game->enemy_img,
+					col * TILE_SIZE, row * TILE_SIZE);
 			}
 			col++;
 		}
