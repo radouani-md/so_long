@@ -112,7 +112,7 @@ char	**load_map(const char *file, int *width, int *height)
 		return (write(2, "Error loading !!", 16), NULL);
 	map = allocate(map, num_lines, fd);
 	if (!map)
-		return (NULL);
+		return (write(1, "Error Allocation\n", 17), NULL);
 	map = fill_map(map, fd);
 	close(fd);
 	if (!map)

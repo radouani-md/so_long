@@ -80,7 +80,7 @@ void	setup_graphics(t_game *game)
 		exit(0);
 	}
 	game->win = mlx_new_window(game->mlx, game->width * TILE_SIZE,
-			game->height * TILE_SIZE, "/so_long/");
+			game->height * TILE_SIZE, "./so_long");
 	if (!game->win)
 	{
 		write(2, "Error: Failed to create a window\n", 33);
