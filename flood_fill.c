@@ -74,6 +74,18 @@ void	flood_file(t_game *game, int x, int y, t_flood *flood)
 	flood_file(game, x, y - 1, flood);
 }
 
+int	check_copy_map(t_game *game, int i)
+{
+	if (!game->copy_map[i])
+	{
+		while (i > 0)
+			free(game->copy_map[--i]);
+		free(game->copy_map);
+		return (0);
+	}
+	return (1);
+}
+
 int	validate_map(t_game *game)
 {
 	t_flood	flood;
@@ -88,6 +100,8 @@ int	validate_map(t_game *game)
 	while (game->map[i])
 	{
 		game->copy_map[i] = ft_strdup(game->map[i]);
+		if (!check_copy_map(game, i))
+			return (0);
 		i++;
 	}
 	game->copy_map[i] = NULL;
@@ -98,6 +112,5 @@ int	validate_map(t_game *game)
 		return (1);
 	if (flood.collectibles != game->collec_coin)
 		write(2, "Error:\n Map validation failed (No Coins).\n", 42);
-	write(2, "Error: Map validation failed (No Exit found).\n", 46);
-	return (0);
+	return (write(2, "Error: Map validation failed (No Exit found).\n", 46), 0);
 }
