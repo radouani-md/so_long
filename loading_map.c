@@ -41,7 +41,7 @@ int	calculate_num_of_lines(const char *file)
 	fd = open(file, O_RDONLY);
 	if (is_ber(file) == 0 || is_not_directory(file) == 0 || fd < 0)
 	{
-		write(2, "Error uplaod .BER Or DIR , Error loading\n", 41);
+		write(2, "Error:\n uplaod .BER Or DIR , Error loading\n", 43);
 		exit(0);
 	}
 	num_lines = 0;
@@ -106,13 +106,13 @@ char	**load_map(const char *file, int *width, int *height)
 	map = NULL;
 	num_lines = calculate_num_of_lines(file);
 	if (num_lines == 0)
-		return (write(2, "The file is Empty or has newlines\n", 34), NULL);
+		return (write(2, "Error:\n file is Empty or has newlines\n", 38), NULL);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		return (write(2, "Error loading !!", 16), NULL);
+		return (write(2, "Error:\n loading !!", 18), NULL);
 	map = allocate(map, num_lines, fd);
 	if (!map)
-		return (write(1, "Error Allocation\n", 17), NULL);
+		return (write(2, "Error:\n Allocation\n", 19), NULL);
 	map = fill_map(map, fd);
 	close(fd);
 	if (!map)

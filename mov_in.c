@@ -35,7 +35,7 @@ int	handle_special_tiles(t_game *game, int new_x, int new_y)
 	{
 		if (game->collec_coin > 0)
 			return (0);
-		write(1, "\nCongrats ! You Win :) \n", 24);
+		write(1, "Congrats ! You Win :) \n", 23);
 		ft_free(game->map);
 		free_resources(game);
 		exit(0);

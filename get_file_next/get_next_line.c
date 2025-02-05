@@ -88,8 +88,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0)
 	{
-		if (static_v)
-			free(static_v);
+		free(static_v);
 		static_v = NULL;
 		return (NULL);
 	}

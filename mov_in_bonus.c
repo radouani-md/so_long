@@ -36,14 +36,14 @@ int	handle_special_tiles(t_game *game, int new_x, int new_y)
 	{
 		if (game->collec_coin > 0)
 			return (0);
-		write(1, "\nCONGRATS You Win !\n", 20);
+		write(1, "CONGRATS You Win !\n", 19);
 		ft_free(game->map);
 		free_resources(game);
 		exit(0);
 	}
 	if (game->map[new_y][new_x] == 'M')
 	{
-		write(1, "\nGAME OVER !! Try Again\n", 24);
+		write(1, "GAME OVER !! Try Again\n", 23);
 		ft_free(game->map);
 		free_resources(game);
 		exit(0);

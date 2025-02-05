@@ -88,5 +88,6 @@ void	set_direction(int keycode, t_game *game);
 int		animate_enemy(t_game *game);
 void	enemy_img(t_game *game, int img_width, int img_height);
 void	redraw_enemy(t_game *game);
+int		size_icron(t_game *game);
 
 #endif

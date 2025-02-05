@@ -41,6 +41,7 @@ int	close_window(t_game *game)
 {
 	free_resources(game);
 	ft_free(game->map);
-	write(1, "\nMap is Closed. Do you feel boring !!", 37);
+	get_next_line(-1);
+	write(1, "Map is Closed. Do you feel boring !!", 36);
 	exit(0);
 }

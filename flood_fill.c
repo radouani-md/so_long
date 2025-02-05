@@ -83,6 +83,8 @@ int	validate_map(t_game *game)
 	flood.exit_found = 0;
 	i = 0;
 	game->copy_map = malloc((game->height + 1) * sizeof(char *));
+	if (!game->copy_map)
+		return (0);
 	while (game->map[i])
 	{
 		game->copy_map[i] = ft_strdup(game->map[i]);
@@ -95,7 +97,7 @@ int	validate_map(t_game *game)
 	if (flood.collectibles == game->collec_coin && flood.exit_found)
 		return (1);
 	if (flood.collectibles != game->collec_coin)
-		write(1, "Error: Map validation failed (No Coins or Enmy).\n", 49);
-	write(1, "Error: Map validation failed (No Exit found).\n", 46);
+		write(2, "Error:\n Map validation failed (No Coins).\n", 42);
+	write(2, "Error: Map validation failed (No Exit found).\n", 46);
 	return (0);
 }

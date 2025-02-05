@@ -33,7 +33,7 @@ int	check_two_player(t_game *game)
 	}
 	if (conter > 1)
 	{
-		write(1, "Map invalid, You Have two or more Players\n", 42);
+		write(2, "Error :\nMap invalid, You Have two or more Players\n", 50);
 		return (0);
 	}
 	return (1);
@@ -60,7 +60,7 @@ int	check_two_exit(t_game *game)
 	}
 	if (conter > 1)
 	{
-		write(1, "Map invalid, You Have two or more Exit\n", 39);
+		write(2, "Error:\nMap invalid, You Have two or more Exit\n", 46);
 		return (0);
 	}
 	return (1);
@@ -105,6 +105,21 @@ int	check_close(t_game *game)
 		if (game->map[row][0] != '1' || game->map[row][game->width - 1] != '1')
 			return (0);
 		row++;
+	}
+	return (1);
+}
+
+int	size_icron(t_game *game)
+{
+	if (game->height > 31)
+	{
+		write (2, "Error:\n The height is too long than Pc height\n", 46);
+		return (0);
+	}
+	if (game->width > 57)
+	{
+		write (2, "Error:\n The height is too long than Pc width\n", 45);
+		return (0);
 	}
 	return (1);
 }

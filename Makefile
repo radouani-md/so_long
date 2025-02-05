@@ -1,8 +1,17 @@
-HEADER_BNUS = so_long_bonus.h
+HEADER_BONUS = so_long_bonus.h
+
 HEADER = so_long.h
+
+HEADER_GET = get_file_next/get.h
+
+HEADER_GET_BONUS = get_file_next/get_bonus.h
+
 NAME = so_long
+
 NAME_BONUS = so_long_bonus
+
 dirGet = get_file_next
+
 CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
@@ -24,7 +33,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(MLX_FLAGS) -o $(NAME)
 
-%.o: %.c $(HEADER) 
+%.o: %.c $(HEADER) $(HEADER_GET) $(HEADER_GET_BONUS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 bonus : ${NAME_BONUS}
