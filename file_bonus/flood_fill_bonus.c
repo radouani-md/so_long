@@ -79,7 +79,10 @@ void	flood_file(t_game *game, int x, int y, t_flood *flood)
 	if (game->copy_map[y][x] == 'C')
 		flood->collectibles++;
 	if (game->copy_map[y][x] == 'E')
+	{
 		flood->exit_found = 1;
+		return ;
+	}
 	game->copy_map[y][x] = 'F';
 	flood_file(game, x + 1, y, flood);
 	flood_file(game, x - 1, y, flood);
