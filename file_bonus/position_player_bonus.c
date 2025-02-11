@@ -53,7 +53,7 @@ void	display_moves(t_game *game)
 
 	move_str = md_itoa(game->moves);
 	draw_map(game);
-	mlx_string_put(game->mlx, game->win, 10, 10, 0xFFFFFF, "Moves :");
-	mlx_string_put(game->mlx, game->win, 60, 10, 0xFFFFFF, move_str);
+	mlx_string_put(game->mlx, game->win, 10, 10, 0x00FF00, "Moves :");
+	mlx_string_put(game->mlx, game->win, 60, 10, 0x00FF00, move_str);
 	free(move_str);
 }

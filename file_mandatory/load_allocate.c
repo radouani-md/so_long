@@ -17,7 +17,7 @@ char	**allocate(char **map, int num_lines, int fd)
 	map = malloc((num_lines + 1) * sizeof(char *));
 	if (!map)
 	{
-		write(2, "Error:\n Memory allocation failed for map.\n", 42);
+		write(2, "Error\n Memory allocation failed for map.\n", 41);
 		close(fd);
 		return (NULL);
 	}

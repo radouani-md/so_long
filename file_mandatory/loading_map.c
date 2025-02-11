@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long_bonus.h"
+#include "so_long.h"
 
 int	continue_calculate(int num_lines, int fd)
 {
@@ -41,7 +41,7 @@ int	calculate_num_of_lines(const char *file)
 	fd = open(file, O_RDONLY);
 	if (is_ber(file) == 0 || is_not_directory(file) == 0 || fd < 0)
 	{
-		write(2, "Error:\n uplaod .BER Or DIR , Error loading\n", 43);
+		write(2, "Error\n uplaod .BER Or DIR , Error loading\n", 42);
 		exit(0);
 	}
 	num_lines = 0;
@@ -106,13 +106,13 @@ char	**load_map(const char *file, int *width, int *height)
 	map = NULL;
 	num_lines = calculate_num_of_lines(file);
 	if (num_lines == 0)
-		return (write(2, "Error:\n file is Empty or has newlines\n", 38), NULL);
+		return (write(2, "Error\n file is Empty or has newlines\n", 37), NULL);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		return (write(2, "Error:\n loading !!", 18), NULL);
+		return (write(2, "Error\n loading !!", 17), NULL);
 	map = allocate(map, num_lines, fd);
 	if (!map)
-		return (NULL);
+		return (write(2, "Error\n Allocation\n", 18), NULL);
 	map = fill_map(map, fd);
 	close(fd);
 	if (!map)

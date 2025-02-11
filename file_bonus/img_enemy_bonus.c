@@ -49,3 +49,27 @@ void	redraw_enemy(t_game *game)
 		row++;
 	}
 }
+
+void	count_emys(t_game *game)
+{
+	int		row;
+	int		col;
+
+	row = 0;
+	game->count_enemy = 0;
+	while (row < game->height)
+	{
+		col = 0;
+		while (col < game->width)
+		{
+			if (game->map[row][col] == 'M')
+				game->count_enemy++;
+			col++;
+		}
+		row++;
+	}
+	game->enemies = malloc(sizeof(t_enemy) * game->count_enemy);
+	if (!game->enemies)
+		return (free_resources(game), ft_free(game->map), exit(0));
+	find_enemy(game);
+}

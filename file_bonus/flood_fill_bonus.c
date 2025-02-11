@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 int	count_collectible(t_game *game)
 {
@@ -32,6 +32,18 @@ int	count_collectible(t_game *game)
 		row++;
 	}
 	return (count);
+}
+
+int	check_copy_map(t_game *game, int i)
+{
+	if (!game->copy_map[i])
+	{
+		while (i > 0)
+			free(game->copy_map[--i]);
+		free(game->copy_map);
+		return (0);
+	}
+	return (1);
 }
 
 void	find_position(t_game *game, int *px, int *py)
@@ -61,7 +73,8 @@ void	flood_file(t_game *game, int x, int y, t_flood *flood)
 {
 	if (x < 0 || y < 0 || y >= game->height || x >= game->width)
 		return ;
-	if (game->copy_map[y][x] == '1' || game->copy_map[y][x] == 'F')
+	if (game->copy_map[y][x] == '1' || game->copy_map[y][x] == 'F'
+		|| game->copy_map[y][x] == 'M')
 		return ;
 	if (game->copy_map[y][x] == 'C')
 		flood->collectibles++;
@@ -72,18 +85,6 @@ void	flood_file(t_game *game, int x, int y, t_flood *flood)
 	flood_file(game, x - 1, y, flood);
 	flood_file(game, x, y + 1, flood);
 	flood_file(game, x, y - 1, flood);
-}
-
-int	check_copy_map(t_game *game, int i)
-{
-	if (!game->copy_map[i])
-	{
-		while (i > 0)
-			free(game->copy_map[--i]);
-		free(game->copy_map);
-		return (0);
-	}
-	return (1);
 }
 
 int	validate_map(t_game *game)
@@ -111,6 +112,6 @@ int	validate_map(t_game *game)
 	if (flood.collectibles == game->collec_coin && flood.exit_found)
 		return (1);
 	if (flood.collectibles != game->collec_coin)
-		write(2, "Error:\n Map validation failed (No Coins).\n", 42);
-	return (write(2, "Error: Map validation failed (No Exit found).\n", 46), 0);
+		write(2, "Error\n Map validation failed (No Coins or Enmy).\n", 49);
+	return (write(2, "Erro\n Map validation failed (No Exit found).\n", 45), 0);
 }

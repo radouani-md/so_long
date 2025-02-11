@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long_bonus.h"
+#include "so_long.h"
 
 int	check_two_player(t_game *game)
 {
@@ -33,7 +33,7 @@ int	check_two_player(t_game *game)
 	}
 	if (conter > 1)
 	{
-		write(2, "Error :\nMap invalid, You Have two or more Players\n", 50);
+		write(2, "Error\nMap invalid, You Have two or more Players\n", 48);
 		return (0);
 	}
 	return (1);
@@ -60,7 +60,7 @@ int	check_two_exit(t_game *game)
 	}
 	if (conter > 1)
 	{
-		write(2, "Error:\nMap invalid, You Have two or more Exit\n", 46);
+		write(2, "Error:\n Map invalid, You Have two or more Exit\n", 47);
 		return (0);
 	}
 	return (1);
@@ -77,7 +77,7 @@ int	check_width(t_game *game)
 	{
 		if (ft_strlen(game->map[row]) != dfault)
 		{
-			write(1, "Map invalid, you have deffernt width\n", 37);
+			write(1, "Error:\n Map invalid, you have deffernt width\n", 45);
 			return (0);
 		}
 		row++;

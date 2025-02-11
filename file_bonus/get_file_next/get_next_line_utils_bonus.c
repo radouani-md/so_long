@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get.h"
+#include "get_bonus.h"
 
 char	*ft_strdup(char const *src)
 {

@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mradouan <mradouan@student.42.fr>          #+#  +:+       +#+        */
+/*   By: mradouan <mradouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-01-28 22:16:08 by mradouan          #+#    #+#             */
-/*   Updated: 2025-01-28 22:16:08 by mradouan         ###   ########.fr       */
+/*   Created: 2025/01/28 22:16:08 by mradouan          #+#    #+#             */
+/*   Updated: 2025/02/02 20:44:32 by mradouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_BONUS_H
-# define SO_LONG_BONUS_H
+#ifndef SO_LONG_H
+# define SO_LONG_H
 
 # ifndef PLAYER_SIZE
 #  define PLAYER_SIZE 64
@@ -23,7 +23,7 @@
 
 # include "/home/mradouan/Desktop/include/mlx/mlx.h"
 # include <unistd.h>
-# include "get_file_next/get.h"
+# include "../get_file_next/get.h"
 # include <stdlib.h>
 # include <fcntl.h>
 
@@ -38,18 +38,11 @@ typedef struct s_game
 	int		player_x;
 	int		player_y;
 	int		collec_coin;
-	void	*enemy_img;
 	void	*wall_img;
 	void	*space_img;
 	void	*collectible_img;
 	void	*exit_img;
 	void	*player_img;
-	void	*enemy_img_left;
-	void	*enemy_img_right;
-	void	*enemy_img_up;
-	void	*enemy_img_down;
-	int		is_yes;
-	int		enemy_frame;
 	int		moves;
 	int		direction;
 }	t_game;
@@ -81,13 +74,9 @@ void	ft_free(char **map);
 void	md_print_nb(int nb);
 int		close_window(t_game *game);
 char	**allocate(char **map, int num_lines, int fd);
-char	*md_itoa(int n);
 void	display_moves(t_game *game);
 void	get_direction(t_game *game, int img_width, int img_height);
 void	set_direction(int keycode, t_game *game);
-int		animate_enemy(t_game *game);
-void	enemy_img(t_game *game, int img_width, int img_height);
-void	redraw_enemy(t_game *game);
 int		size_icron(t_game *game);
 
 #endif

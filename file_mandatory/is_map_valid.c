@@ -37,7 +37,7 @@ int	validate_characters(t_game *game)
 				continue ;
 			}
 			if (!is_valid_char(cell))
-				return (write(2, "Error:\n Invalid character\n", 26), 0);
+				return (write(2, "Error\n Invalid character\n", 25), 0);
 			x++;
 		}
 		y++;
@@ -51,7 +51,7 @@ int	check_cpe01(t_game *game)
 		return (0);
 	if (!has_required_elements(game))
 	{
-		write(2, "Error:\n Map must contain at least one ECP10\n", 44);
+		write(2, "Error\n Map must contain at least one ECP10\n", 43);
 		return (0);
 	}
 	if (!check_two_player(game) || !check_two_exit(game))
@@ -60,7 +60,7 @@ int	check_cpe01(t_game *game)
 		return (0);
 	if (!check_close(game))
 	{
-		write(2, "Error:\n Map is Not Closed !!\n", 29);
+		write(2, "Error\n Map is Not Closed !!\n", 28);
 		return (0);
 	}
 	if (!validate_map(game))

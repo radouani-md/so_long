@@ -43,7 +43,7 @@ int	handle_special_tiles(t_game *game, int new_x, int new_y)
 	}
 	if (game->map[new_y][new_x] == 'M')
 	{
-		write(1, "GAME OVER !! Try Again\n", 23);
+		write(2, "Game Over, The Enemy has Killed you\n", 36);
 		ft_free(game->map);
 		free_resources(game);
 		exit(0);
@@ -81,7 +81,6 @@ int	get_move(int keycode, t_game *game, int img_width, int img_height)
 {
 	int			new_x;
 	int			new_y;
-	static int	d = 1;
 
 	img_width = 0;
 	img_height = 0;
@@ -94,10 +93,7 @@ int	get_move(int keycode, t_game *game, int img_width, int img_height)
 	if (game->map[new_y][new_x] == '0' ||
 	game->map[new_y][new_x] == 'C' ||
 	(game->map[new_y][new_x] == 'E' && game->collec_coin == 0))
-	{
 		game->moves++;
-		md_print_nb(d++);
-	}
 	if (handle_special_tiles(game, new_x, new_y))
 	{
 		get_direction(game, img_width, img_height);

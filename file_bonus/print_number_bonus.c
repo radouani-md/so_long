@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   load_allocate.c                                    :+:      :+:    :+:   */
+/*   print_number.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mradouan <mradouan@student.42.fr>          #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-01-28 21:12:09 by mradouan          #+#    #+#             */
-/*   Updated: 2025-01-28 21:12:09 by mradouan         ###   ########.fr       */
+/*   Created: 2025-01-28 21:42:15 by mradouan          #+#    #+#             */
+/*   Updated: 2025-01-28 21:42:15 by mradouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-char	**allocate(char **map, int num_lines, int fd)
+int	close_window(t_game *game)
 {
-	map = malloc((num_lines + 1) * sizeof(char *));
-	if (!map)
-	{
-		write(2, "Error:\n Memory allocation failed for map.\n", 42);
-		close(fd);
-		return (NULL);
-	}
-	return (map);
+	free_resources(game);
+	ft_free(game->map);
+	write(1, "Map is Closed. Do you feel boring !!", 36);
+	exit(0);
 }

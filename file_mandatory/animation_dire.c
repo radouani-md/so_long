@@ -10,12 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long_bonus.h"
+#include "so_long.h"
 
-void	get_direction(t_game *game, int img_width, int img_height)
+void	helper_get(t_game *game, int img_width, int img_height)
 {
-	if (game->player_img)
-		mlx_destroy_image(game->mlx, game->player_img);
 	if (game->direction == 1)
 	{
 		game->player_img = mlx_xpm_file_to_image(game->mlx,
@@ -38,23 +36,15 @@ void	get_direction(t_game *game, int img_width, int img_height)
 	}
 }
 
-int	animate_enemy(t_game *game)
+void	get_direction(t_game *game, int img_width, int img_height)
 {
-	static int	frame_count = 0;
-
-	frame_count++;
-	if (frame_count >= 18000)
+	if (game->player_img)
+		mlx_destroy_image(game->mlx, game->player_img);
+	helper_get(game, img_width, img_height);
+	if (!game->player_img)
 	{
-		if (game->enemy_img == game->enemy_img_up)
-			game->enemy_img = game->enemy_img_down;
-		else if (game->enemy_img == game->enemy_img_down)
-			game->enemy_img = game->enemy_img_right;
-		else if (game->enemy_img == game->enemy_img_right)
-			game->enemy_img = game->enemy_img_left;
-		else
-			game->enemy_img = game->enemy_img_up;
-		redraw_enemy(game);
-		frame_count = 0;
+		write(1, "Error\n Failed to load .xpm\n", 27);
+		free_resources(game);
+		exit(0);
 	}
-	return (1);
 }

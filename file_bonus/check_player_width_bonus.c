@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 int	check_two_player(t_game *game)
 {
@@ -33,7 +33,7 @@ int	check_two_player(t_game *game)
 	}
 	if (conter > 1)
 	{
-		write(2, "Error :\nMap invalid, You Have two or more Players\n", 50);
+		write(2, "Error\nMap invalid, You Have two or more Players\n", 48);
 		return (0);
 	}
 	return (1);
@@ -60,7 +60,7 @@ int	check_two_exit(t_game *game)
 	}
 	if (conter > 1)
 	{
-		write(2, "Error:\n Map invalid, You Have two or more Exit\n", 47);
+		write(2, "Error\nMap invalid, You Have two or more Exit\n", 45);
 		return (0);
 	}
 	return (1);
@@ -77,7 +77,7 @@ int	check_width(t_game *game)
 	{
 		if (ft_strlen(game->map[row]) != dfault)
 		{
-			write(1, "Error:\n Map invalid, you have deffernt width\n", 45);
+			write(1, "Error\nMap invalid, you have deffernt width\n", 43);
 			return (0);
 		}
 		row++;
@@ -113,12 +113,12 @@ int	size_icron(t_game *game)
 {
 	if (game->height > 31)
 	{
-		write (2, "Error:\n The height is too long than Pc height\n", 46);
+		write (2, "Error\n The height is too long than Pc height\n", 45);
 		return (0);
 	}
 	if (game->width > 57)
 	{
-		write (2, "Error:\n The height is too long than Pc width\n", 45);
+		write (2, "Error\n The height is too long than Pc width\n", 44);
 		return (0);
 	}
 	return (1);
