@@ -25,7 +25,6 @@
 # include <unistd.h>
 # include "../get_file_next/get.h"
 # include <stdlib.h>
-# include <stdio.h>
 # include <fcntl.h>
 
 typedef struct s_enemy

@@ -49,10 +49,10 @@ int	calculate_num_of_lines(const char *file)
 	if (line && line[0] == '\n')
 	{
 		free(line);
-		return (0);
+		return (close(fd), 0);
 	}
 	else if (!line)
-		return (0);
+		return (close(fd), 0);
 	num_lines++;
 	free(line);
 	num_lines = continue_calculate(num_lines, fd);
@@ -106,8 +106,7 @@ char	**load_map(const char *file, int *width, int *height)
 	map = NULL;
 	num_lines = calculate_num_of_lines(file);
 	if (num_lines == 0)
-		return (write(2, "Error\n file is Empty or has newlines\n", 37),
-			close(fd), NULL);
+		return (write(2, "Error\n file is Empty or has newlines\n", 37), NULL);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (write(2, "Error\n loading !!", 17), NULL);
