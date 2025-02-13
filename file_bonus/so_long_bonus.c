@@ -66,6 +66,8 @@ int	initialize_game(t_game *game, char *map_path)
 	{
 		write(2, "Error\n Invalid map. Exiting.\n", 29);
 		ft_free(game->map);
+		if (game->enemies)
+			free(game->enemies);
 		return (0);
 	}
 	return (1);
